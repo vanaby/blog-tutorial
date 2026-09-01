@@ -1,3 +1,4 @@
+import { Navbar } from "./components/navbar";
 
 export type  BlogItem = {
     userId: number;
@@ -14,19 +15,25 @@ export default async function Home() {
 //      .then(json => console.log(json));
 
   return (
-    <main className="flex min-h-screen flex-col p-24 gap-y-8 bg-linear-to-b from-blue-100 to-pink-100">
+    <>
+    <Navbar />
+    <main className="mx-auto max-w-7xl px-6 py-12">
       {
         blogEntries.map((singlePost : BlogItem) => {
           return(
-            <div key={singlePost.id}>
-              <h2 className="font-extrabold text-xl">{singlePost.title}</h2>
-              <span>
-                {singlePost.body}
-              </span>
-            </div>
+        <section key={singlePost.id} className="space-y-4">
+          <h2 className="text-3xl font-bold">{singlePost.title}</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl">
+            ID: {singlePost.id}
+          </p>
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-6">
+            <p className="text-sm">{singlePost.body}</p>
+          </div>
+        </section>
           );
         })
       }
     </main>
+    </>
   );
 }
